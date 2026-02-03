@@ -169,6 +169,9 @@
         flex-direction: column;
         cursor: pointer;
         gap: 5px;
+        z-index: 1001;
+        -webkit-tap-highlight-color: transparent;
+        padding: 5px;
       }
 
       .menu-toggle span {
@@ -176,6 +179,19 @@
         height: 3px;
         background: var(--maroon);
         transition: all 0.3s ease;
+        border-radius: 2px;
+      }
+
+      .menu-toggle.active span:nth-child(1) {
+        transform: rotate(45deg) translate(8px, 8px);
+      }
+
+      .menu-toggle.active span:nth-child(2) {
+        opacity: 0;
+      }
+
+      .menu-toggle.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -7px);
       }
 
       /* Hero Section */
@@ -257,6 +273,7 @@
         flex-wrap: wrap;
       }
 
+      /* Button Styles */
       .btn {
         padding: 1rem 2.5rem;
         border-radius: 50px;
@@ -267,6 +284,8 @@
         display: inline-block;
         border: none;
         cursor: pointer;
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
       }
 
       .btn-primary {
@@ -1034,6 +1053,9 @@
         font-size: 1rem;
         background: white;
         transition: border-color 0.3s ease;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
       }
 
       .form-group input:focus,
@@ -1045,6 +1067,15 @@
       .form-group textarea {
         resize: vertical;
         min-height: 120px;
+      }
+
+      /* Improve touch targets on mobile */
+      @media (max-width: 640px) {
+        .form-group input,
+        .form-group textarea {
+          padding: 1.1rem;
+          font-size: 16px; /* Prevents zoom on iOS */
+        }
       }
 
       .map-container {
@@ -1251,40 +1282,131 @@
           display: flex;
         }
 
+        .hero {
+          height: 100vh;
+          background-attachment: scroll;
+        }
+
         .hero h1 {
-          font-size: 2.5rem;
+          font-size: 2.8rem;
+          line-height: 1.2;
         }
 
         .hero-subtitle {
-          font-size: 1.2rem;
+          font-size: 1.3rem;
         }
 
         .about-content,
         .restaurant-content,
         .contact-container {
           grid-template-columns: 1fr;
+          gap: 2.5rem;
         }
 
         .section-title h2 {
-          font-size: 2.2rem;
+          font-size: 2.5rem;
+        }
+
+        .highlights {
+          grid-template-columns: 1fr;
+          gap: 1.5rem;
+        }
+
+        .restaurant-images {
+          grid-template-columns: 1fr;
+        }
+
+        .rooms-grid,
+        .amenities-grid,
+        .events-grid,
+        .testimonials-grid {
+          grid-template-columns: 1fr;
+        }
+
+        section {
+          padding: 4rem 1.5rem;
+        }
+
+        .about,
+        .restaurant,
+        .contact {
+          padding: 3rem 2rem;
+        }
+
+        .nav-container {
+          padding: 1rem 1.5rem;
+        }
+
+        .logo {
+          font-size: 1.5rem;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .hero {
+          margin-top: 70px;
+          height: 90vh;
+        }
+
+        .hero h1 {
+          font-size: 2rem;
+          margin-bottom: 0.8rem;
+        }
+
+        .hero-subtitle {
+          font-size: 1.1rem;
+          margin-bottom: 2rem;
+        }
+
+        .hero-buttons {
+          flex-direction: column;
+          gap: 1rem;
+        }
+
+        .btn {
+          padding: 0.9rem 2rem;
+          font-size: 1rem;
+          width: 100%;
+          max-width: 300px;
+        }
+
+        .section-title h2 {
+          font-size: 2rem;
+        }
+
+        .section-title p {
+          font-size: 1rem;
+          padding: 0 1rem;
+        }
+
+        section {
+          padding: 3rem 1rem;
+        }
+
+        .about,
+        .restaurant,
+        .contact {
+          padding: 2.5rem 1.5rem;
+        }
+
+        .about-text h3 {
+          font-size: 2rem;
+        }
+
+        .about-text p {
+          font-size: 1rem;
+        }
+
+        .about-image img {
+          height: 300px;
         }
 
         .highlights {
           grid-template-columns: 1fr;
         }
 
-        .restaurant-images {
-          grid-template-columns: 1fr;
-        }
-      }
-
-      @media (max-width: 640px) {
-        .hero h1 {
-          font-size: 2rem;
-        }
-
-        .hero-buttons {
-          flex-direction: column;
+        .highlight-item {
+          padding: 1.5rem 1rem;
         }
 
         .rooms-grid,
@@ -1293,6 +1415,119 @@
         .testimonials-grid,
         .gallery-grid {
           grid-template-columns: 1fr;
+          gap: 1.5rem;
+        }
+
+        .room-card {
+          margin: 0 auto;
+          max-width: 100%;
+        }
+
+        .room-content {
+          padding: 1.5rem;
+        }
+
+        .room-content h3 {
+          font-size: 1.5rem;
+        }
+
+        .room-price {
+          flex-direction: column;
+          gap: 1rem;
+          align-items: flex-start;
+        }
+
+        .room-price .btn {
+          width: 100%;
+          max-width: 100%;
+          text-align: center;
+        }
+
+        .amenity-card {
+          padding: 2rem 1.5rem;
+        }
+
+        .amenity-icon {
+          font-size: 3rem;
+        }
+
+        .restaurant-text h2 {
+          font-size: 2.2rem;
+        }
+
+        .restaurant-text p {
+          font-size: 1rem;
+        }
+
+        .cuisine-list {
+          grid-template-columns: 1fr;
+        }
+
+        .restaurant-images {
+          grid-template-columns: 1fr;
+        }
+
+        .restaurant-images img {
+          height: 200px;
+        }
+
+        .event-card {
+          height: 350px;
+        }
+
+        .event-overlay {
+          padding: 2rem 1.5rem;
+        }
+
+        .event-overlay h3 {
+          font-size: 1.5rem;
+        }
+
+        .testimonial-card {
+          padding: 2rem 1.5rem;
+        }
+
+        .quote-icon {
+          font-size: 3rem;
+        }
+
+        .gallery-item {
+          height: 250px;
+        }
+
+        .contact-container {
+          gap: 2.5rem;
+        }
+
+        .contact-info h3,
+        .contact-form h3 {
+          font-size: 1.8rem;
+        }
+
+        .contact-item {
+          gap: 1rem;
+        }
+
+        .contact-icon {
+          font-size: 1.5rem;
+        }
+
+        .contact-form {
+          padding: 2rem 1.5rem;
+        }
+
+        .map-container {
+          height: 300px;
+          margin-top: 2rem;
+        }
+
+        .footer-content {
+          grid-template-columns: 1fr;
+          gap: 2rem;
+        }
+
+        .footer-cta {
+          padding: 2rem 1.5rem;
         }
 
         .floating-buttons {
@@ -1301,13 +1536,123 @@
         }
 
         .float-btn {
-          width: 50px;
-          height: 50px;
+          width: 55px;
+          height: 55px;
+          font-size: 1.6rem;
+        }
+
+        .nav-container {
+          padding: 1rem;
+        }
+
+        .logo {
+          font-size: 1.3rem;
+        }
+
+        .logo-icon {
           font-size: 1.5rem;
         }
 
-        section {
-          padding: 4rem 1.5rem;
+        .navbar {
+          padding: 0;
+        }
+
+        .menu-toggle span {
+          width: 22px;
+          height: 2.5px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .hero h1 {
+          font-size: 1.7rem;
+        }
+
+        .hero-subtitle {
+          font-size: 1rem;
+          letter-spacing: 1px;
+        }
+
+        .section-title h2 {
+          font-size: 1.8rem;
+        }
+
+        .about-text h3 {
+          font-size: 1.7rem;
+        }
+
+        .restaurant-text h2 {
+          font-size: 2rem;
+        }
+
+        .room-content h3 {
+          font-size: 1.4rem;
+        }
+
+        .amenity-card h4 {
+          font-size: 1.2rem;
+        }
+
+        .event-overlay h3 {
+          font-size: 1.3rem;
+        }
+
+        .event-overlay p {
+          font-size: 0.9rem;
+        }
+
+        .testimonial-card p {
+          font-size: 0.95rem;
+        }
+
+        .floating-buttons {
+          bottom: 15px;
+          right: 15px;
+        }
+
+        .float-btn {
+          width: 50px;
+          height: 50px;
+          font-size: 1.4rem;
+        }
+
+        .btn {
+          padding: 0.8rem 1.5rem;
+          font-size: 0.95rem;
+        }
+
+        .footer-section h3 {
+          font-size: 1.3rem;
+        }
+      }
+
+      /* Tablet Portrait */
+      @media (min-width: 641px) and (max-width: 968px) {
+        .rooms-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .amenities-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .gallery-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .highlights {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+
+      /* Small tablets and large phones in landscape */
+      @media (min-width: 481px) and (max-width: 640px) {
+        .hero h1 {
+          font-size: 2.2rem;
+        }
+
+        .section-title h2 {
+          font-size: 2.2rem;
         }
       }
     </style>
@@ -1810,7 +2155,7 @@
               <div>
                 <h4>Address</h4>
                 <p>
-                  Hotel Wings Grand<br />Near Kanhaiyya Sweets, 200Ft Road<br />Alwar,
+                  Hotel Wings Grand<br />Near Kanhaiya Sweets , 200 Ft Road<br />Alwar,
                   Rajasthan 301001<br />India
                 </p>
               </div>
@@ -1830,11 +2175,21 @@
               <div>
                 <h4>Email</h4>
                 <p>
-                  <a href="mailto:reservations@hotelwingsgrand.com"
-                    >reservations@hotelwingsgrand.com</a
+                  <a
+                    href="/cdn-cgi/l/email-protection#5321362036212532273a3c3d20133b3c27363f243a3d34203421323d377d303c3e"
+                    ><span
+                      class="__cf_email__"
+                      data-cfemail="790b1c0a1c0b0f180d1016170a3911160d1c150e10171e0a1e0b18171d571a1614"
+                      >[email&#160;protected]</span
+                    ></a
                   ><br />
-                  <a href="mailto:info@hotelwingsgrand.com"
-                    >info@hotelwingsgrand.com</a
+                  <a
+                    href="/cdn-cgi/l/email-protection#bfd6d1d9d0ffd7d0cbdad3c8d6d1d8ccd8cdded1db91dcd0d2"
+                    ><span
+                      class="__cf_email__"
+                      data-cfemail="2b42454d446b43445f4e475c42454c584c594a454f05484446"
+                      >[email&#160;protected]</span
+                    ></a
                   >
                 </p>
               </div>
@@ -1959,7 +2314,21 @@
       </a>
     </div>
 
+    <script
+      data-cfasync="false"
+      src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"
+    ></script>
     <script>
+      // Fix for mobile viewport height
+      function setVH() {
+        let vh = window.innerHeight * 0.01;
+        document.documentElement.style.setProperty("--vh", `${vh}px`);
+      }
+
+      setVH();
+      window.addEventListener("resize", setVH);
+      window.addEventListener("orientationchange", setVH);
+
       // Sticky Navigation
       window.addEventListener("scroll", function () {
         const navbar = document.querySelector(".navbar");
@@ -1973,14 +2342,32 @@
       // Mobile Menu Toggle
       function toggleMenu() {
         const navLinks = document.querySelector(".nav-links");
+        const menuToggle = document.querySelector(".menu-toggle");
         navLinks.classList.toggle("active");
+        menuToggle.classList.toggle("active");
       }
 
       // Close mobile menu when clicking a link
       document.querySelectorAll(".nav-links a").forEach((link) => {
         link.addEventListener("click", () => {
           document.querySelector(".nav-links").classList.remove("active");
+          document.querySelector(".menu-toggle").classList.remove("active");
         });
+      });
+
+      // Close menu when clicking outside
+      document.addEventListener("click", function (event) {
+        const navLinks = document.querySelector(".nav-links");
+        const menuToggle = document.querySelector(".menu-toggle");
+        const navbar = document.querySelector(".navbar");
+
+        if (
+          !navbar.contains(event.target) &&
+          navLinks.classList.contains("active")
+        ) {
+          navLinks.classList.remove("active");
+          menuToggle.classList.remove("active");
+        }
       });
 
       // Smooth Scroll
@@ -2029,12 +2416,47 @@
           observer.observe(el);
         });
 
-      // Parallax effect for hero section
-      window.addEventListener("scroll", function () {
-        const hero = document.querySelector(".hero");
-        const scrolled = window.pageYOffset;
-        hero.style.transform = `translateY(${scrolled * 0.5}px)`;
-      });
+      // Disable animations on mobile for better performance
+      if (window.innerWidth <= 968) {
+        const style = document.createElement("style");
+        style.innerHTML = `
+                * {
+                    animation-duration: 0.01ms !important;
+                    animation-iteration-count: 1 !important;
+                    transition-duration: 0.01ms !important;
+                }
+            `;
+        // Commented out to keep animations on mobile - users typically enjoy them
+        // document.head.appendChild(style);
+      }
+
+      // Prevent zoom on double tap on iOS
+      let lastTouchEnd = 0;
+      document.addEventListener(
+        "touchend",
+        function (event) {
+          const now = new Date().getTime();
+          if (now - lastTouchEnd <= 300) {
+            event.preventDefault();
+          }
+          lastTouchEnd = now;
+        },
+        false,
+      );
+
+      // Lazy load images for better mobile performance
+      if ("loading" in HTMLImageElement.prototype) {
+        const images = document.querySelectorAll('img[loading="lazy"]');
+        images.forEach((img) => {
+          img.src = img.dataset.src;
+        });
+      } else {
+        // Fallback for browsers that don't support lazy loading
+        const script = document.createElement("script");
+        script.src =
+          "https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js";
+        document.body.appendChild(script);
+      }
     </script>
   </body>
 </html>
